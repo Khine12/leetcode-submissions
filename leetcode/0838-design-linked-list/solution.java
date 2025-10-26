@@ -1,6 +1,6 @@
 class MyLinkedList {
     
-    private static class Node{
+    public static class Node{
         
         int val;
         
@@ -10,9 +10,9 @@ class MyLinkedList {
     }
     
     private final Node head;
-        
+    
     private final Node tail;
-        
+    
     private int size;
 
     public MyLinkedList() {
@@ -32,17 +32,17 @@ class MyLinkedList {
         
         Node node = nodeAt(index);
         
-        return node == null ? -1 : node.val;
+        return node==null ? -1 : node.val;
     }
     
     public void addAtHead(int val) {
         
-        insertBetween(new Node(val),head,head.next);
+        insertBetween (new Node(val),head,head.next);
     }
     
     public void addAtTail(int val) {
         
-        insertBetween(new Node(val),tail.prev,tail);
+        insertBetween (new Node(val),tail.prev,tail);
     }
     
     public void addAtIndex(int index, int val) {
@@ -52,8 +52,6 @@ class MyLinkedList {
         if(index<0) index=0;
         
         Node succ = (index==size) ? tail : nodeAt(index);
-        
-        if(succ==null) return;
         
         Node pred = succ.prev;
         
@@ -65,7 +63,7 @@ class MyLinkedList {
         Node target = nodeAt(index);
         
         if(target==null) return;
-        
+            
         unlink(target);
     }
     
@@ -73,21 +71,21 @@ class MyLinkedList {
         
         if(index<0 || index>=size) return null;
         
-        Node cur;
+        Node curr;
         
-        if(index < size-index){
+        if(index<size-index){
             
-            cur = head.next;
+            curr = head.next;
             
-            for(int i=0; i<index; i++) cur = cur.next;
-        } 
+            for(int i=0; i<index; i++) curr=curr.next;
+        }
         else{
             
-            cur = tail.prev;
+            curr = tail.prev;
             
-            for(int i=size-1; i>index; i--) cur = cur.prev;
+            for(int i=size-1; i>index; i--) curr = curr.prev;
         }
-        return cur;
+        return curr;
     }
     
     private void insertBetween(Node node, Node pred, Node succ){
@@ -103,13 +101,16 @@ class MyLinkedList {
         size++;
     }
     
+    
     private void unlink(Node node){
         
-        Node pred = node.prev, succ = node.next;
+        Node succ = node.next;
         
-        pred.next = succ;
+        Node pred = node.prev;
         
         succ.prev = pred;
+        
+        pred.next = succ;
         
         size--;
     }
