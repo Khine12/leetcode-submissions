@@ -22,7 +22,7 @@ class Solution {
         
         TreeNode curr = root;
         
-        while(curr!=null || !stack.isEmpty()){
+        while (curr != null || !stack.isEmpty()){
             
             while(curr!=null){
                 
@@ -35,8 +35,10 @@ class Solution {
             
             result.add(curr.val);
             
-            curr =curr.right;
+            curr = curr.right;
         }
+        
         return result;
+       
     }
 }
