@@ -19,7 +19,7 @@ class Solution {
     
     private int[] postorder;
     
-    Map <Integer, Integer> inorderIndexMap;
+    Map <Integer,Integer> inorderIndexMap;
     
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         
@@ -29,17 +29,16 @@ class Solution {
         
         inorderIndexMap = new HashMap<>();
         
-        for(int i=0; i<inorder.length; i++){
+        for(int i=0; i < inorder.length; i++){
             
             inorderIndexMap.put(inorder[i],i);
         }
-        
         return build(0,inorder.length-1);
     }
     
-    private TreeNode build(int inLeft, int inRight){
+    private TreeNode build (int left, int right){
         
-        if(inLeft>inRight) return null;
+        if(left>right) return null;
         
         int rootVal = postorder[postIndex];
         
@@ -49,9 +48,9 @@ class Solution {
         
         int index = inorderIndexMap.get(rootVal);
         
-        root.right = build(index+1, inRight);
+        root.right = build(index+1,right);
         
-        root.left = build(inLeft, index-1);
+        root.left = build(left,index-1);
         
         return root;
     }
